@@ -1,27 +1,38 @@
-import React, {useState, useEffect} from 'react';
-import { Text, View, ScrollView, TextInput, AsyncStorage, FlatList} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { AsyncStorage, ScrollView, Text, TextInput } from 'react-native';
 
 export default function MyDayScreen() {
   const [value, setValue] = useState ("");
+  const [data, setData] = useState ({});
   useEffect(()=>{
-    get()
+    // get()
   },[])
     async function set() {
     try {
       await AsyncStorage.setItem("name", value)
     } catch(e){}
   }
+  // async function get() {
+  //   try {
+  //     let info = await AsyncStorage.getItem("name")
+  //     if (info !== null) {
+  //       setValue(info)
+  //     }
+  //   } catch(e){}
+  // }
   async function get() {
     try {
-      let info = await AsyncStorage.getItem("name")
-      if (info !== null) {
-        setValue(info)
-      }
+      let getData = await AsyncStorage.getItem("data")
+      if (getData !== null) {
+           setData(getData)
+         }
     } catch(e){}
   }
+
+
   function setName(name) {
     setValue(name);
-    set();
+    // set();
   }
   return (
     <ScrollView>
